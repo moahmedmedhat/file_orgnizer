@@ -1,0 +1,48 @@
+#!/bin/bash
+
+####### mohamed medhat mohamed ####### 
+####### gmail to comnnucate : mohamedmedhatt2003@gmail.com ####### 
+
+### first we make function to crear directory 
+creat_dir(){
+    ##check if directory not exixt will make one
+    if [ ! -d "$1" ]; then
+        mkdir -p "$1"
+    fi
+}
+
+##### function that orgnize your files
+
+fiLe_org(){
+    ###make for loop because will enter more than one file
+    for i in $1 $2 $3 $4; do
+    file="$i"
+    ### make var called extentionto get extention of file
+    declare extension=${file##*.}
+    ###make if condtion on extention
+    if [ "${extension}" == txt  -o  "${extension}" == jpg -o  "${extension}" == pdf -o  "${extension}" == "" ]; then
+    ###creat the directory and move the file in it
+    creat_dir $extension
+    mv $file $extension
+    echo "$extension"
+    echo "$file"
+    else
+    ###make else for file not have extention 
+    creat_dir MISC
+    mv $file MISC
+    echo "MISC"
+    echo "$file"
+    fi
+    done
+
+}
+
+###main function 
+main() {
+    fiLe_org $1 $2 $3 $4
+}
+
+        
+###called main 
+main $1 $2 $3 $4
+
